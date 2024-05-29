@@ -94,6 +94,7 @@ function Form() {
         backgroundColor: "black",
       }}
     >
+      {/* This shows the banner */}
       <div
         style={{
           backgroundImage: "url(" + backgroundImg + ")",
@@ -119,6 +120,7 @@ function Form() {
           Discover new things on Superapp
         </p>
       </div>
+      {/* This shows the form.  */}
       <form
         style={{
           display: "flex",
