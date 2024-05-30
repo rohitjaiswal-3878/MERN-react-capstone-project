@@ -7,12 +7,13 @@ function Chip({ selectedMovie, setSelectedMovies }) {
   return (
     <span
       style={{
-        border: "1px solid black",
-        padding: "5px",
-        borderRadius: "5px",
+        padding: "5px 16px  5px 16px",
+        borderRadius: "20px",
         display: "flex",
         justifyContent: "space-between",
-        alignItems: "cneter",
+        alignItems: "fle",
+        width: "90px",
+        backgroundColor: "#148A08",
       }}
     >
       {selectedMovie}&nbsp;&nbsp;
@@ -20,6 +21,7 @@ function Chip({ selectedMovie, setSelectedMovies }) {
         onClick={handleSelection}
         style={{
           cursor: "pointer",
+          color: "#085C00",
         }}
       >
         x
