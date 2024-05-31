@@ -11,18 +11,35 @@ function Box({ data, selectedMovies, setSelectedMovies }) {
   return (
     <div
       style={{
-        border: `2px solid ${
-          selectedMovies.includes(data.category) ? "green" : "black"
+        border: `3px solid ${
+          selectedMovies.includes(data.category) ? "#11B800" : "black"
         }`,
         padding: "10px",
-        margin: "10px",
-        width: "100px",
-        height: "100px",
+        margin: "0px",
+        width: "115px",
+        height: "110px",
         display: "inline-block",
+        backgroundColor: data.bgColor,
+        borderRadius: "15px",
       }}
       onClick={handleSelection}
     >
-      {data.category}
+      <span
+        style={{
+          fontSize: "19px",
+        }}
+      >
+        {data.category}
+      </span>
+      <img
+        src={data.url}
+        alt={data.category}
+        style={{
+          objectFit: "contain",
+          width: "100%",
+          marginTop: "19px",
+        }}
+      />
     </div>
   );
 }

@@ -7,7 +7,7 @@ function Chip({ selectedMovie, setSelectedMovies }) {
   return (
     <span
       style={{
-        padding: "5px 16px  5px 16px",
+        padding: "7px 16px  7px 16px",
         borderRadius: "20px",
         display: "flex",
         justifyContent: "space-between",
