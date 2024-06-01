@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import profileIcon from "../assets/Profile.png";
 
 function Movies() {
   const GENRE_LIST = [
@@ -469,6 +470,7 @@ function Movies() {
   const seletecdGenresToFetch = selectedMoviesByUser.map((movie) => {
     return GENRE_LIST.find((genre) => genre.name === movie);
   });
+  console.log(seletecdGenresToFetch);
 
   // useEffect(() => {
   //   async function fetchMovies(id) {
@@ -504,34 +506,92 @@ function Movies() {
   //   });
   // }, [seletecdGenresToFetch]); // if this changes we will again call the api.This is the dependency
   return (
-    <div>
+    <div
+      style={{
+        backgroundColor: "black",
+      }}
+    >
       <div
         style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(3,1fr)",
+          display: "flex",
+          justifyContent: "space-between",
+          width: "100%",
         }}
       >
-        {movies.map((movie) => (
-          <div
-            id={movie.id}
-            style={{
-              padding: "10px",
-              margin: "10px",
-              width: "100px",
-              height: "100px",
-              display: "flex",
-              flexDirection: "column",
-            }}
-          >
-            <img
-              src={movie.poster_path}
-              alt={movie.title}
-              height={100}
-              width={100}
-            />
-            {movie.title}
-          </div>
-        ))}
+        <h3
+          style={{
+            marginTop: "10px",
+            fontFamily: "Single Day",
+            fontSize: "2.3rem",
+            fontWeight: "400",
+            color: "#72DB73",
+            marginLeft: "30px",
+          }}
+        >
+          Super app
+        </h3>
+
+        <img
+          src={profileIcon}
+          alt="profile"
+          style={{
+            height: "60px",
+            width: "60px",
+            marginRight: "30px",
+            marginTop: "20px",
+          }}
+        />
+      </div>
+      <div
+        style={{
+          color: "white",
+          width: "90%",
+          margin: "0 auto",
+        }}
+      >
+        <h3
+          style={{
+            fontWeight: "500",
+            fontSize: "19px",
+          }}
+        >
+          Entertainment according to your choice
+        </h3>
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(4,250px)",
+            rowGap: "50px",
+            columnGap: "50px",
+            marginTop: "20px",
+          }}
+        >
+          {movies.map((movie) => (
+            <div
+              key={movie.id}
+              style={{
+                width: "250px",
+                height: "135px",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+                alignItems: "center",
+                borderRadius: "15px",
+              }}
+            >
+              <img
+                src={movie.backdrop_path}
+                alt={movie.title}
+                style={{
+                  height: "100%",
+                  width: "100%",
+                  borderRadius: "15px",
+                }}
+              />
+              {movie.title}
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
