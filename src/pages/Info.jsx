@@ -1,14 +1,78 @@
 import React, { useEffect, useState } from "react";
+import { CountdownCircleTimer } from "react-countdown-circle-timer";
 
 function Info() {
   return (
     <div>
       <UserData />
-      <WeatherData />
-      <NewsData />
+      {/* <WeatherData />
+      <NewsData /> */}
+      <NotePad />
+      <Timer />
     </div>
   );
 }
+
+const Timer = () => {
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [time, setTime] = useState(0);
+  const increaseSecond = () => {
+    setTime((prev) => (prev = prev + 1));
+  };
+  const decreaseSecond = () => {
+    if (time > 0) {
+      setTime((prev) => (prev = prev - 1));
+    }
+  };
+  const increaseMinute = () => {
+    setTime((prev) => (prev = prev + 60));
+  };
+  const decreaseMinute = () => {
+    if (time >= 60) {
+      setTime((prev) => (prev = prev - 60));
+    }
+  };
+  const increaseHour = () => {
+    setTime((prev) => (prev = prev + 3600));
+  };
+  const decreaseHour = () => {
+    if (time >= 3600) {
+      setTime((prev) => (prev = prev - 3600));
+    }
+  };
+
+  const formatTime = (time) => {
+    const hours = parseInt(time / 3600);
+    const minutes = parseInt((time % 3600) / 60);
+    const seconds = parseInt((time % 3600) % 60);
+    return (
+      <p>
+        {hours}:{minutes}:{seconds}
+      </p>
+    );
+  };
+  return (
+    <>
+      <CountdownCircleTimer
+        isPlaying={isPlaying}
+        duration={time}
+        colors={["#004777"]}
+      >
+        {({ remainingTime }) => formatTime(remainingTime)}
+      </CountdownCircleTimer>
+      <button onClick={increaseSecond}>+1 Second</button>
+      <button onClick={decreaseSecond}>-1 Second</button>
+      <button onClick={increaseMinute}>+1 Minute</button>
+      <button onClick={decreaseMinute}>-1 Minute</button>
+      <button onClick={increaseHour}>+1 Hour</button>
+      <button onClick={decreaseHour}>-1 Minute</button>
+      <button disabled={isPlaying} onClick={() => setIsPlaying(true)}>
+        Start
+      </button>
+    </>
+  );
+};
+
 const UserData = () => {
   const userDetails = JSON.parse(localStorage.getItem("userData"));
   const movies = JSON.parse(localStorage.getItem("selectedMovie"));
@@ -242,5 +306,25 @@ const NewsData = () => {
       />
     </div>
   ) : null;
+};
+
+const NotePad = () => {
+  const [data, setData] = useState(localStorage.getItem("notes") ?? "");
+  return (
+    <textarea
+      style={{
+        minHeight: "300px",
+        maxHeight: "300px",
+        backgroundColor: "yellow",
+      }}
+      value={data}
+      onChange={(e) => {
+        localStorage.setItem("notes", e.target.value);
+        setData(e.target.value);
+      }}
+      name=""
+      id=""
+    ></textarea>
+  );
 };
 export default Info;
