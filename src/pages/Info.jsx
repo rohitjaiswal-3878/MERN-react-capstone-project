@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { CountdownCircleTimer } from "react-countdown-circle-timer";
 import profileImg from "../assets/profileImg.png";
+import partlyCloudy from "../assets/partly-cloudy.png";
 
 function Info() {
   return (
@@ -17,6 +18,8 @@ function Info() {
     >
       <div
         style={{
+          display: "flex",
+          flexDirection: "column",
           border: "1px solid white",
           height: "90%",
           width: "60%",
@@ -33,15 +36,28 @@ function Info() {
             style={{
               display: "flex",
               flexDirection: "column",
-              width: "50%",
+              width: "55%",
             }}
           >
             <UserData />
             <WeatherData />
           </div>
-          <NotePad />
+          <div
+            style={{
+              width: "45%",
+            }}
+          >
+            <NotePad />
+          </div>
         </div>
-        {/* <Timer /> */}
+        <div
+          style={{
+            height: "30%",
+            width: "100%",
+          }}
+        >
+          <Timer />
+        </div>
       </div>
       <div
         style={{
@@ -94,7 +110,19 @@ const Timer = () => {
     );
   };
   return (
-    <>
+    <div
+      style={{
+        height: "100%",
+        borderRadius: "10px",
+        width: "92%",
+        margin: "40px 25px",
+        boxSizing: "border-box",
+        display: "flex",
+        background: "#1E2343",
+        justifyContent: "space-around",
+        alignItems: "center",
+      }}
+    >
       <CountdownCircleTimer
         isPlaying={isPlaying}
         duration={time}
@@ -102,16 +130,147 @@ const Timer = () => {
       >
         {({ remainingTime }) => formatTime(remainingTime)}
       </CountdownCircleTimer>
-      <button onClick={increaseSecond}>+1 Second</button>
-      <button onClick={decreaseSecond}>-1 Second</button>
-      <button onClick={increaseMinute}>+1 Minute</button>
-      <button onClick={decreaseMinute}>-1 Minute</button>
-      <button onClick={increaseHour}>+1 Hour</button>
-      <button onClick={decreaseHour}>-1 Minute</button>
-      <button disabled={isPlaying} onClick={() => setIsPlaying(true)}>
-        Start
-      </button>
-    </>
+      <div
+        style={{
+          display: "flex",
+          gap: "10px",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "10px",
+            justifyContent: "content",
+            alignItems: "center",
+          }}
+        >
+          <span>Hours</span>
+          <button
+            onClick={increaseHour}
+            style={{
+              outline: "none",
+              width: "10px",
+              height: "10px",
+              borderBottom: "10px solid white",
+              borderRight: "10px solid  transparent",
+              borderLeft: "10px solid  transparent",
+              backgroundColor: "transparent",
+              borderTop: "10px solid  transparent",
+            }}
+          ></button>
+          <span>{parseInt(time / 3600)}</span>
+          <button
+            onClick={decreaseHour}
+            style={{
+              outline: "none",
+              width: "10px",
+              height: "10px",
+              borderTop: "10px solid white",
+              borderRight: "10px solid  transparent",
+              borderLeft: "10px solid  transparent",
+              backgroundColor: "transparent",
+              borderBottom: "10px solid  transparent",
+            }}
+          ></button>
+        </div>
+        <span
+          style={{
+            marginTop: "25px",
+          }}
+        >
+          :
+        </span>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "10px",
+            justifyContent: "content",
+            alignItems: "center",
+          }}
+        >
+          <span>Minutes</span>
+          <button
+            onClick={increaseMinute}
+            style={{
+              outline: "none",
+              width: "10px",
+              height: "10px",
+              borderBottom: "10px solid white",
+              borderRight: "10px solid  transparent",
+              borderLeft: "10px solid  transparent",
+              backgroundColor: "transparent",
+              borderTop: "10px solid  transparent",
+            }}
+          ></button>
+          <span>{parseInt((time % 3600) / 60)}</span>
+          <button
+            onClick={decreaseMinute}
+            style={{
+              outline: "none",
+              width: "10px",
+              height: "10px",
+              borderTop: "10px solid white",
+              borderRight: "10px solid  transparent",
+              borderLeft: "10px solid  transparent",
+              backgroundColor: "transparent",
+              borderBottom: "10px solid  transparent",
+            }}
+          ></button>
+        </div>
+        <span
+          style={{
+            marginTop: "25px",
+          }}
+        >
+          :
+        </span>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "content",
+            alignItems: "center",
+            gap: "10px",
+          }}
+        >
+          <span>Seconds</span>
+          <button
+            onClick={increaseSecond}
+            style={{
+              outline: "none",
+              width: "10px",
+              height: "10px",
+              borderBottom: "10px solid white",
+              borderRight: "10px solid  transparent",
+              borderLeft: "10px solid  transparent",
+              backgroundColor: "transparent",
+              borderTop: "10px solid  transparent",
+            }}
+          ></button>
+          <span>{parseInt((time % 3600) % 60)}</span>
+          <button
+            onClick={decreaseSecond}
+            style={{
+              outline: "none",
+              width: "10px",
+              height: "10px",
+              borderTop: "10px solid white",
+              borderRight: "10px solid  transparent",
+              borderLeft: "10px solid  transparent",
+              backgroundColor: "transparent",
+              borderBottom: "10px solid  transparent",
+            }}
+          ></button>
+        </div>
+        <button disabled={isPlaying} onClick={() => setIsPlaying(true)}>
+          Start
+        </button>
+      </div>
+    </div>
   );
 };
 
@@ -381,33 +540,60 @@ const WeatherData = () => {
           display: "flex",
           justifyContent: "space-evenly",
           fontSize: "10px",
+          padding: "10px 0",
         }}
       >
         <p
           style={{
             width: "30%",
             textAlign: "center",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            marginTop: "0px",
           }}
         >
+          <img
+            src={partlyCloudy}
+            alt="icon"
+            style={{ height: "40px", width: "40px" }}
+          />
           {weather.current_observation.condition.text}
         </p>
         <div
           style={{
             width: "30%",
             textAlign: "center",
+            borderRight: "1px solid white",
+            borderLeft: "1px solid white",
           }}
         >
-          <p>{weather.current_observation.condition.temperature}&deg;C</p>
-          <p>{weather.current_observation.atmosphere.pressure}</p>
+          <p
+            style={{
+              fontSize: "25px",
+              marginTop: "5px",
+            }}
+          >
+            {weather.current_observation.condition.temperature}&deg;C
+          </p>
+          <p style={{}}>
+            {weather.current_observation.atmosphere.pressure} mber
+            <br />
+            pressure
+          </p>
         </div>
         <div
           style={{
             width: "30%",
             textAlign: "center",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            gap: "10px",
           }}
         >
-          <p>{weather.current_observation.wind.speed}</p>
-          <p>{weather.current_observation.atmosphere.humidity}%</p>
+          <p>{weather.current_observation.wind.speed} km/h wind</p>
+          <p>{weather.current_observation.atmosphere.humidity}% humidity</p>
         </div>
       </div>
     </div>
@@ -567,9 +753,15 @@ const NotePad = () => {
   return (
     <textarea
       style={{
-        minHeight: "300px",
-        maxHeight: "300px",
-        backgroundColor: "yellow",
+        width: "90%",
+        height: "100%",
+        margin: "25px 25px 10px 0px",
+        backgroundColor: "#F1C75B",
+        borderRadius: "10px",
+        padding: "25px",
+        boxSizing: "border-box",
+        outline: "none",
+        border: "2px solid #F1C75B",
       }}
       value={data}
       onChange={(e) => {
