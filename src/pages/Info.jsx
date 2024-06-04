@@ -1,14 +1,56 @@
 import React, { useEffect, useState } from "react";
 import { CountdownCircleTimer } from "react-countdown-circle-timer";
+import profileImg from "../assets/profileImg.png";
 
 function Info() {
   return (
-    <div>
-      <UserData />
-      {/* <WeatherData />
-      <NewsData /> */}
-      <NotePad />
-      <Timer />
+    <div
+      style={{
+        backgroundColor: "black",
+        color: "white",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        height: "100vh",
+        width: "100vw",
+      }}
+    >
+      <div
+        style={{
+          border: "1px solid white",
+          height: "90%",
+          width: "60%",
+        }}
+      >
+        <div
+          style={{
+            display: "flex",
+            height: "60%",
+            width: "100%",
+          }}
+        >
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              width: "50%",
+            }}
+          >
+            <UserData />
+            <WeatherData />
+          </div>
+          <NotePad />
+        </div>
+        {/* <Timer /> */}
+      </div>
+      <div
+        style={{
+          height: "90%",
+          width: "25%",
+        }}
+      >
+        <NewsData />
+      </div>
     </div>
   );
 }
@@ -80,52 +122,222 @@ const UserData = () => {
   return (
     <div
       style={{
-        border: "1px solid black",
         borderRadius: "10px",
-        margin: "10px",
-        padding: "10px",
-        display: "inline-block",
+        margin: "25px 25px 10px 25px",
+        padding: "15px",
+        maxHeight: "55%",
+        display: "flex",
+        gap: "20px",
+        alignItems: "center",
+        backgroundColor: "#5746EA",
       }}
     >
-      <h1>User data</h1>
-      <p>{userDetails.name}</p>
-      <p>{userDetails.email}</p>
-      <p>{userDetails.mobile}</p>
-      <p>
-        {movies.map((movie, index) => (
-          <p key={index}>{movie}</p>
-        ))}
-      </p>
+      <img
+        src={profileImg}
+        alt="profile"
+        style={{
+          height: "100%",
+        }}
+      />
+      <div>
+        <p
+          style={{
+            marginTop: "5px",
+          }}
+        >
+          {userDetails.name}
+        </p>
+        <p
+          style={{
+            marginTop: "5px",
+          }}
+        >
+          {userDetails.email}
+        </p>
+        <p
+          style={{
+            marginTop: "5px",
+            fontSize: "24px",
+            fontWeight: "550",
+          }}
+        >
+          {userDetails.mobile}
+        </p>
+        <p
+          style={{
+            display: "flex",
+            flexWrap: "wrap",
+            gap: "5px",
+            fontSize: "12px",
+            marginTop: "25px",
+          }}
+        >
+          {movies.map((movie, index) => (
+            <p
+              key={index}
+              style={{
+                padding: "4px 11px",
+                width: "70px",
+                borderRadius: "20px",
+                backgroundColor: "#9F94FF",
+              }}
+            >
+              {movie}
+            </p>
+          ))}
+        </p>
+      </div>
     </div>
   );
 };
 
 const WeatherData = () => {
-  const [weather, setWeather] = useState();
+  const [weather, setWeather] = useState({
+    location: {
+      city: "Sunnyvale",
+      woeid: 2502265,
+      country: "United States",
+      lat: 37.371609,
+      long: -122.038254,
+      timezone_id: "America/Los_Angeles",
+    },
+    current_observation: {
+      pubDate: 1717467775,
+      wind: {
+        chill: 68,
+        direction: "NW",
+        speed: 6,
+      },
+      atmosphere: {
+        humidity: 54,
+        visibility: 10,
+        pressure: 1015.2,
+      },
+      astronomy: {
+        sunrise: "5:48 AM",
+        sunset: "8:26 PM",
+      },
+      condition: {
+        temperature: 70,
+        text: "Partly Cloudy",
+        code: 30,
+      },
+    },
+    forecasts: [
+      {
+        day: "Mon",
+        date: 1717516800,
+        high: 79,
+        low: 56,
+        text: "Sunny",
+        code: 32,
+      },
+      {
+        day: "Tue",
+        date: 1717603200,
+        high: 90,
+        low: 56,
+        text: "Sunny",
+        code: 32,
+      },
+      {
+        day: "Wed",
+        date: 1717689600,
+        high: 91,
+        low: 60,
+        text: "Sunny",
+        code: 32,
+      },
+      {
+        day: "Thu",
+        date: 1717776000,
+        high: 84,
+        low: 56,
+        text: "Sunny",
+        code: 32,
+      },
+      {
+        day: "Fri",
+        date: 1717862400,
+        high: 85,
+        low: 55,
+        text: "Partly Cloudy",
+        code: 30,
+      },
+      {
+        day: "Sat",
+        date: 1717948800,
+        high: 80,
+        low: 59,
+        text: "Partly Cloudy",
+        code: 30,
+      },
+      {
+        day: "Sun",
+        date: 1718035200,
+        high: 75,
+        low: 58,
+        text: "Partly Cloudy",
+        code: 30,
+      },
+      {
+        day: "Mon",
+        date: 1718121600,
+        high: 79,
+        low: 59,
+        text: "Mostly Sunny",
+        code: 34,
+      },
+      {
+        day: "Tue",
+        date: 1718208000,
+        high: 84,
+        low: 60,
+        text: "Mostly Cloudy",
+        code: 28,
+      },
+      {
+        day: "Wed",
+        date: 1718294400,
+        high: 80,
+        low: 59,
+        text: "Mostly Sunny",
+        code: 34,
+      },
+      {
+        day: "Thu",
+        date: 1718380800,
+        high: 77,
+        low: 56,
+        text: "Mostly Sunny",
+        code: 34,
+      },
+    ],
+  });
 
-  useEffect(() => {
-    const fetchWeather = async () => {
-      const url =
-        "https://yahoo-weather5.p.rapidapi.com/weather?location=mumbai&format=json&u=f";
-      const options = {
-        method: "GET",
-        headers: {
-          "X-RapidAPI-Key":
-            "65fd3861fdmshd066c8859705509p1b83bbjsn224280ccf5ca",
-          "X-RapidAPI-Host": "yahoo-weather5.p.rapidapi.com",
-        },
-      };
+  // useEffect(() => {
+  //   const fetchWeather = async () => {
+  //     const url =
+  //       "https://yahoo-weather5.p.rapidapi.com/weather?location=mumbai&format=json&u=f";
+  //     const options = {
+  //       method: "GET",
+  //       headers: {
+  //         "X-RapidAPI-Key":
+  //           "65fd3861fdmshd066c8859705509p1b83bbjsn224280ccf5ca",
+  //         "X-RapidAPI-Host": "yahoo-weather5.p.rapidapi.com",
+  //       },
+  //     };
 
-      try {
-        const response = await fetch(url, options);
-        const result = await response.json();
-        setWeather(result);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    fetchWeather();
-  }, []);
+  //     try {
+  //       const response = await fetch(url, options);
+  //       const result = await response.json();
+  //       setWeather(result);
+  //     } catch (error) {
+  //       console.error(error);
+  //     }
+  //   };
+  //   fetchWeather();
+  // }, []);
 
   const date = new Date();
 
@@ -137,25 +349,67 @@ const WeatherData = () => {
   let seconds = date.getSeconds();
 
   // This arrangement can be altered based on how we want the date's format to appear.
-  let currentDate = `${day}/${month}/${year}`;
+  let currentDate = `${day}-${month}-${year}`;
   let currentTime = `${hours}:${minutes}:${seconds}`;
   return weather ? (
     <div
       style={{
-        border: "1px solid black",
         borderRadius: "10px",
-        margin: "10px",
-        padding: "10px",
-        display: "inline-block",
+        margin: "10px 25px 25px 25px",
+        height: "22%",
       }}
     >
-      <h1>Weather Data</h1>
-      <p>{currentDate}</p>
-      <p>{currentTime}</p>
-      <p>Wind Speed: {weather.current_observation.wind.speed}</p>
-      <p>Humidity: {weather.current_observation.atmosphere.humidity}</p>
-      <p>Pressure: {weather.current_observation.atmosphere.pressure}</p>
-      <p>Temperature: {weather.current_observation.condition.temperature}</p>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-around",
+          backgroundColor: "#FF4ADE",
+          borderStartStartRadius: "10px",
+          borderStartEndRadius: "10px",
+          fontSize: "20px",
+          padding: "5px 0px",
+        }}
+      >
+        <p>{currentDate}</p>
+        <p>{currentTime}</p>
+      </div>
+      <div
+        style={{
+          backgroundColor: "#101744",
+          borderEndEndRadius: "10px",
+          borderEndStartRadius: "10px",
+          display: "flex",
+          justifyContent: "space-evenly",
+          fontSize: "10px",
+        }}
+      >
+        <p
+          style={{
+            width: "30%",
+            textAlign: "center",
+          }}
+        >
+          {weather.current_observation.condition.text}
+        </p>
+        <div
+          style={{
+            width: "30%",
+            textAlign: "center",
+          }}
+        >
+          <p>{weather.current_observation.condition.temperature}&deg;C</p>
+          <p>{weather.current_observation.atmosphere.pressure}</p>
+        </div>
+        <div
+          style={{
+            width: "30%",
+            textAlign: "center",
+          }}
+        >
+          <p>{weather.current_observation.wind.speed}</p>
+          <p>{weather.current_observation.atmosphere.humidity}%</p>
+        </div>
+      </div>
     </div>
   ) : null;
 };
