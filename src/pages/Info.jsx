@@ -2,8 +2,10 @@ import React, { useEffect, useState } from "react";
 import { CountdownCircleTimer } from "react-countdown-circle-timer";
 import profileImg from "../assets/profileImg.png";
 import partlyCloudy from "../assets/partly-cloudy.png";
+import { useNavigate } from "react-router-dom";
 
 function Info() {
+  const navigate = useNavigate();
   return (
     <div
       style={{
@@ -20,7 +22,6 @@ function Info() {
         style={{
           display: "flex",
           flexDirection: "column",
-          border: "1px solid white",
           height: "90%",
           width: "60%",
         }}
@@ -37,6 +38,7 @@ function Info() {
               display: "flex",
               flexDirection: "column",
               width: "55%",
+              height: "100%",
             }}
           >
             <UserData />
@@ -54,6 +56,7 @@ function Info() {
           style={{
             height: "30%",
             width: "100%",
+            marginTop: "10px",
           }}
         >
           <Timer />
@@ -62,11 +65,30 @@ function Info() {
       <div
         style={{
           height: "90%",
-          width: "25%",
+          width: "18%",
         }}
       >
         <NewsData />
       </div>
+      <button
+        onClick={() => {
+          navigate("/movies");
+        }}
+        style={{
+          position: "fixed",
+          bottom: "20px",
+          right: "25px",
+          width: "120px",
+          padding: "6px 0px",
+          borderRadius: "15px",
+          backgroundColor: "#148A08",
+          color: "white",
+          outline: "none",
+          border: "none",
+        }}
+      >
+        Browse
+      </button>
     </div>
   );
 }
@@ -123,17 +145,29 @@ const Timer = () => {
         alignItems: "center",
       }}
     >
-      <CountdownCircleTimer
-        isPlaying={isPlaying}
-        duration={time}
-        colors={["#004777"]}
+      <div
+        style={{
+          padding: "10px",
+          borderRadius: "50%",
+          boxShadow: "0px 0px 10px 5px black inset",
+          fontSize: "30px",
+        }}
       >
-        {({ remainingTime }) => formatTime(remainingTime)}
-      </CountdownCircleTimer>
+        <CountdownCircleTimer
+          isPlaying={isPlaying}
+          duration={time}
+          colors={["#FF6A6A"]}
+          size={120}
+          strokeWidth={5}
+        >
+          {({ remainingTime }) => formatTime(remainingTime)}
+        </CountdownCircleTimer>
+      </div>
       <div
         style={{
           display: "flex",
           gap: "10px",
+          flexDirection: "column",
           justifyContent: "center",
           alignItems: "center",
         }}
@@ -141,132 +175,183 @@ const Timer = () => {
         <div
           style={{
             display: "flex",
-            flexDirection: "column",
-            gap: "10px",
-            justifyContent: "content",
-            alignItems: "center",
-          }}
-        >
-          <span>Hours</span>
-          <button
-            onClick={increaseHour}
-            style={{
-              outline: "none",
-              width: "10px",
-              height: "10px",
-              borderBottom: "10px solid white",
-              borderRight: "10px solid  transparent",
-              borderLeft: "10px solid  transparent",
-              backgroundColor: "transparent",
-              borderTop: "10px solid  transparent",
-            }}
-          ></button>
-          <span>{parseInt(time / 3600)}</span>
-          <button
-            onClick={decreaseHour}
-            style={{
-              outline: "none",
-              width: "10px",
-              height: "10px",
-              borderTop: "10px solid white",
-              borderRight: "10px solid  transparent",
-              borderLeft: "10px solid  transparent",
-              backgroundColor: "transparent",
-              borderBottom: "10px solid  transparent",
-            }}
-          ></button>
-        </div>
-        <span
-          style={{
-            marginTop: "25px",
-          }}
-        >
-          :
-        </span>
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            gap: "10px",
-            justifyContent: "content",
-            alignItems: "center",
-          }}
-        >
-          <span>Minutes</span>
-          <button
-            onClick={increaseMinute}
-            style={{
-              outline: "none",
-              width: "10px",
-              height: "10px",
-              borderBottom: "10px solid white",
-              borderRight: "10px solid  transparent",
-              borderLeft: "10px solid  transparent",
-              backgroundColor: "transparent",
-              borderTop: "10px solid  transparent",
-            }}
-          ></button>
-          <span>{parseInt((time % 3600) / 60)}</span>
-          <button
-            onClick={decreaseMinute}
-            style={{
-              outline: "none",
-              width: "10px",
-              height: "10px",
-              borderTop: "10px solid white",
-              borderRight: "10px solid  transparent",
-              borderLeft: "10px solid  transparent",
-              backgroundColor: "transparent",
-              borderBottom: "10px solid  transparent",
-            }}
-          ></button>
-        </div>
-        <span
-          style={{
-            marginTop: "25px",
-          }}
-        >
-          :
-        </span>
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "content",
+            justifyContent: "center",
             alignItems: "center",
             gap: "10px",
           }}
         >
-          <span>Seconds</span>
-          <button
-            onClick={increaseSecond}
+          <div
             style={{
-              outline: "none",
-              width: "10px",
-              height: "10px",
-              borderBottom: "10px solid white",
-              borderRight: "10px solid  transparent",
-              borderLeft: "10px solid  transparent",
-              backgroundColor: "transparent",
-              borderTop: "10px solid  transparent",
+              display: "flex",
+              flexDirection: "column",
+              gap: "10px",
+              justifyContent: "content",
+              alignItems: "center",
             }}
-          ></button>
-          <span>{parseInt((time % 3600) % 60)}</span>
-          <button
-            onClick={decreaseSecond}
+          >
+            <span
+              style={{
+                color: "#949494",
+              }}
+            >
+              Hours
+            </span>
+            <button
+              onClick={increaseHour}
+              style={{
+                outline: "none",
+                width: "10px",
+                height: "10px",
+                borderBottom: "10px solid #949494",
+                borderRight: "10px solid  transparent",
+                borderLeft: "10px solid  transparent",
+                backgroundColor: "transparent",
+                borderTop: "10px solid  transparent",
+              }}
+            ></button>
+            <span style={{ fontSize: "35px" }}>
+              {parseInt(time / 3600) > 9
+                ? parseInt(time / 3600)
+                : "0" + parseInt(time / 3600)}
+            </span>
+            <button
+              onClick={decreaseHour}
+              style={{
+                outline: "none",
+                width: "10px",
+                height: "10px",
+                borderTop: "10px solid #949494",
+                borderRight: "10px solid  transparent",
+                borderLeft: "10px solid  transparent",
+                backgroundColor: "transparent",
+                borderBottom: "10px solid  transparent",
+              }}
+            ></button>
+          </div>
+          <span
             style={{
-              outline: "none",
-              width: "10px",
-              height: "10px",
-              borderTop: "10px solid white",
-              borderRight: "10px solid  transparent",
-              borderLeft: "10px solid  transparent",
-              backgroundColor: "transparent",
-              borderBottom: "10px solid  transparent",
+              marginTop: "25px",
+              fontSize: "35px",
             }}
-          ></button>
+          >
+            :
+          </span>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              gap: "10px",
+              justifyContent: "content",
+              alignItems: "center",
+            }}
+          >
+            <span
+              style={{
+                color: "#949494",
+              }}
+            >
+              Minutes
+            </span>
+            <button
+              onClick={increaseMinute}
+              style={{
+                outline: "none",
+                width: "10px",
+                height: "10px",
+                borderBottom: "10px solid #949494",
+                borderRight: "10px solid  transparent",
+                borderLeft: "10px solid  transparent",
+                backgroundColor: "transparent",
+                borderTop: "10px solid  transparent",
+              }}
+            ></button>
+            <span style={{ fontSize: "35px" }}>
+              {parseInt((time % 3600) / 60) > 9
+                ? parseInt((time % 3600) / 60)
+                : "0" + parseInt((time % 3600) / 60)}
+            </span>
+            <button
+              onClick={decreaseMinute}
+              style={{
+                outline: "none",
+                width: "10px",
+                height: "10px",
+                borderTop: "10px solid #949494",
+                borderRight: "10px solid  transparent",
+                borderLeft: "10px solid  transparent",
+                backgroundColor: "transparent",
+                borderBottom: "10px solid  transparent",
+              }}
+            ></button>
+          </div>
+          <span
+            style={{
+              marginTop: "25px",
+              fontSize: "35px",
+            }}
+          >
+            :
+          </span>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "content",
+              alignItems: "center",
+              gap: "10px",
+            }}
+          >
+            <span
+              style={{
+                color: "#949494",
+              }}
+            >
+              Seconds
+            </span>
+            <button
+              onClick={increaseSecond}
+              style={{
+                outline: "none",
+                width: "10px",
+                height: "10px",
+                borderBottom: "10px solid #949494",
+                borderRight: "10px solid  transparent",
+                borderLeft: "10px solid  transparent",
+                backgroundColor: "transparent",
+                borderTop: "10px solid  transparent",
+              }}
+            ></button>
+            <span style={{ fontSize: "35px" }}>
+              {parseInt((time % 3600) % 60) > 9
+                ? parseInt((time % 3600) % 60)
+                : "0" + parseInt((time % 3600) % 60)}
+            </span>
+            <button
+              onClick={decreaseSecond}
+              style={{
+                outline: "none",
+                width: "10px",
+                height: "10px",
+                borderTop: "10px solid #949494",
+                borderRight: "10px solid  transparent",
+                borderLeft: "10px solid  transparent",
+                backgroundColor: "transparent",
+                borderBottom: "10px solid  transparent",
+              }}
+            ></button>
+          </div>
         </div>
-        <button disabled={isPlaying} onClick={() => setIsPlaying(true)}>
+        <button
+          disabled={isPlaying}
+          onClick={() => setIsPlaying(true)}
+          style={{
+            width: "100%",
+            backgroundColor: "#FF6A6A",
+            borderRadius: "20px",
+            color: "white",
+            padding: "3px 0px",
+          }}
+        >
           Start
         </button>
       </div>
@@ -515,7 +600,7 @@ const WeatherData = () => {
       style={{
         borderRadius: "10px",
         margin: "10px 25px 25px 25px",
-        height: "22%",
+        maxHeight: "100%",
       }}
     >
       <div
@@ -527,6 +612,7 @@ const WeatherData = () => {
           borderStartEndRadius: "10px",
           fontSize: "20px",
           padding: "5px 0px",
+          maxHeight: "20%",
         }}
       >
         <p>{currentDate}</p>
@@ -541,6 +627,7 @@ const WeatherData = () => {
           justifyContent: "space-evenly",
           fontSize: "10px",
           padding: "10px 0",
+          maxHeight: "80%",
         }}
       >
         <p
@@ -730,20 +817,61 @@ const NewsData = () => {
   return news ? (
     <div
       style={{
-        border: "1px solid black",
         borderRadius: "10px",
-        margin: "10px",
-        padding: "10px",
+        width: "100%",
+        padding: "20px 0px",
+        height: "95%",
       }}
     >
-      <p>{news.items[0].title}</p>
-      <p>{news.items[0].snippet}</p>
-      <img
-        src={news.items[0].images.thumbnailProxied}
-        width={100}
-        height={100}
-        alt="banner"
-      />
+      <div
+        style={{
+          borderRadius: "15px",
+          height: "100%",
+          width: "100%",
+          backgroundColor: "white",
+        }}
+      >
+        <div
+          style={{
+            width: "100%",
+            height: "63%",
+            position: "relative",
+          }}
+        >
+          <img
+            src={news.items[0].images.thumbnailProxied}
+            alt="banner"
+            style={{
+              objectFit: "cover",
+              width: "100%",
+              height: "100%",
+              borderStartEndRadius: "15px",
+              borderStartStartRadius: "15px",
+            }}
+          />
+          <p
+            style={{
+              position: "absolute",
+              bottom: "0px",
+              padding: "15px",
+              fontSize: "20px",
+              backgroundColor: "#000000BD",
+            }}
+          >
+            {news.items[0].title}
+          </p>
+        </div>
+        <p
+          style={{
+            padding: "15px",
+            color: "black",
+            fontSize: "15px",
+            lineHeight: "1.7",
+          }}
+        >
+          {news.items[0].snippet}
+        </p>
+      </div>
     </div>
   ) : null;
 };
