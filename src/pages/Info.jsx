@@ -349,7 +349,8 @@ const Timer = () => {
             backgroundColor: "#FF6A6A",
             borderRadius: "20px",
             color: "white",
-            padding: "3px 0px",
+            padding: "5px 0px",
+            border: "none",
           }}
         >
           Start

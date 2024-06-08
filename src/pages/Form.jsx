@@ -234,7 +234,7 @@ function Form() {
 
           <div>
             <input
-              type="tel"
+              type="number"
               name="mobile"
               id="mobile"
               onChange={handleChange}

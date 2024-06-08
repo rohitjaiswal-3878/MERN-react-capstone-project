@@ -560,7 +560,7 @@ function Movies() {
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(4,250px)",
+            gridTemplateColumns: "repeat(4,4fr)",
             rowGap: "50px",
             columnGap: "50px",
             marginTop: "20px",
@@ -570,12 +570,9 @@ function Movies() {
             <div
               key={movie.id}
               style={{
-                width: "250px",
-                height: "135px",
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "center",
-                alignItems: "center",
+                width: "100%",
+                height: "82%",
+                textAlign: "center",
                 borderRadius: "15px",
               }}
             >
